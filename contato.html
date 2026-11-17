@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Contato</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Atendimento TechStore</h1>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="explorar.html">Explorar</a></li>
+                <li><a href="ferramentas.html">Ferramentas</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section>
+
+            <h2>Formulário de Atendimento</h2>
+
+            <p>
+                Preencha os campos abaixo para entrar em contato
+                com nossa equipe. Informe seu CEP para preencher
+                automaticamente os dados do endereço.
+            </p>
+
+            <form id="formContato">
+
+                <div class="campo-formulario">
+                    <label for="nomeCliente">
+                        Nome Completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomeCliente"
+                        name="nome"
+                        autocomplete="name"
+                        required
+                        placeholder="Digite seu nome">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="emailCliente">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="emailCliente"
+                        name="email"
+                        autocomplete="email"
+                        required
+                        placeholder="Digite seu e-mail">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="telefoneCliente">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefoneCliente"
+                        name="telefone"
+                        autocomplete="tel"
+                        placeholder="(41) 99999-9999">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="campoCep">
+                        CEP
+                    </label>
+
+                    <input
+                        type="text"
+                        id="campoCep"
+                        name="cep"
+                        maxlength="8"
+                        inputmode="numeric"
+                        required
+                        placeholder="Digite o CEP">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="rua">
+                        Rua
+                    </label>
+
+                    <input
+                        type="text"
+                        id="rua"
+                        name="rua"
+                        readonly
+                        placeholder="Preenchimento automático">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="bairro">
+                        Bairro
+                    </label>
+
+                    <input
+                        type="text"
+                        id="bairro"
+                        name="bairro"
+                        readonly
+                        placeholder="Preenchimento automático">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="cidade">
+                        Cidade
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cidade"
+                        name="cidade"
+                        readonly
+                        placeholder="Preenchimento automático">
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="mensagemCliente">
+                        Mensagem
+                    </label>
+
+                    <textarea
+                        id="mensagemCliente"
+                        name="mensagem"
+                        rows="5"
+                        required
+                        placeholder="Digite sua mensagem">
+                    </textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    id="btnEnviar">
+                    Enviar mensagem
+                </button>
+
+            </form>
+
+        </section>
+
+        <section>
+
+            <h2>Status do Envio</h2>
+
+            <div
+                id="resultadoFormulario"
+                aria-live="polite">
+                Nenhum envio realizado.
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            TechStore © 2026 | Projeto Final RA 3
+        </p>
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

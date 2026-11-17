@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Explorar Produtos</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Catálogo TechStore</h1>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="explorar.html" aria-current="page">Explorar</a></li>
+                <li><a href="ferramentas.html">Ferramentas</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <section>
+
+            <h2>Buscar Produtos</h2>
+
+            <p>
+                Confira nosso catálogo de produtos tecnológicos.
+                Utilize a busca para encontrar o produto desejado.
+            </p>
+
+            <label for="campoBusca">
+                Pesquisar produto:
+            </label>
+
+            <input
+                type="text"
+                id="campoBusca"
+                name="busca"
+                placeholder="Digite o nome de um produto"
+                autocomplete="off">
+
+            <button
+                type="button"
+                id="btnTema">
+                Alternar Tema
+            </button>
+
+        </section>
+
+        <section>
+
+            <h2>Produtos Disponíveis</h2>
+
+            <p
+                id="mensagemCarregamento"
+                aria-live="polite">
+                Carregando produtos...
+            </p>
+
+            <section
+                id="gradeProdutos"
+                class="grade-produtos"
+                aria-label="Lista de produtos">
+            </section>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            TechStore © 2026 | Projeto Final RA 3
+        </p>
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
