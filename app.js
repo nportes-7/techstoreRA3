@@ -66,7 +66,7 @@ async function carregarProdutos() {
             mensagem.textContent = "";
         }
 
-        renderizarCartoes(produtosMemoria);
+        aplicarBusca();
 
     } catch (erro) {
 
@@ -167,7 +167,8 @@ function alternarFavorito(idProduto) {
         JSON.stringify(favoritos)
     );
 
-    renderizarCartoes(produtosMemoria);
+    // Mantém o filtro atual quando um favorito é alterado.
+    aplicarBusca();
 }
 
 
@@ -175,34 +176,23 @@ function alternarFavorito(idProduto) {
 // BUSCA
 // ======================
 
+function aplicarBusca() {
+    const campoBusca = document.getElementById("campoBusca");
+    const termo = campoBusca ? campoBusca.value.trim().toLowerCase() : "";
+
+    const filtrados = produtosMemoria.filter((produto) =>
+        produto.title.toLowerCase().includes(termo) ||
+        produto.category.toLowerCase().includes(termo)
+    );
+
+    renderizarCartoes(filtrados);
+}
+
 function configurarBusca() {
+    const campoBusca = document.getElementById("campoBusca");
+    if (!campoBusca) return;
 
-    const campoBusca =
-        document.getElementById("campoBusca");
-
-    if (!campoBusca) {
-        return;
-    }
-
-    campoBusca.addEventListener("input", (evento) => {
-
-        const termo =
-            evento.target.value.toLowerCase();
-
-        const filtrados =
-            produtosMemoria.filter((produto) =>
-
-                produto.title.toLowerCase().includes(termo)
-
-                ||
-
-                produto.category.toLowerCase().includes(termo)
-
-            );
-
-        renderizarCartoes(filtrados);
-
-    });
+    campoBusca.addEventListener("input", aplicarBusca);
 }
 
 
@@ -418,6 +408,10 @@ function configurarViaCEP() {
                 `https://viacep.com.br/ws/${cep}/json/`
             );
 
+            if (!resposta.ok) {
+                throw new Error("Falha na consulta do CEP: " + resposta.status);
+            }
+
             const dados = await resposta.json();
 
             if (dados.erro) {
@@ -495,9 +489,13 @@ function configurarFormulario() {
                 }
             );
 
+            // Só confirma o envio se o servidor responder com sucesso.
+            if (!resposta.ok) {
+                throw new Error("Falha no envio: " + resposta.status);
+            }
+
             document.getElementById("resultadoFormulario").textContent =
-                "Enviado com sucesso! Status: " +
-                resposta.status;
+                "Enviado com sucesso! Status: " + resposta.status;
 
             formulario.reset();
 
