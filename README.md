@@ -188,4 +188,4 @@ Evidências coletadas durante a investigação:
 
 Este projeto possui finalidade acadêmica e utiliza APIs públicas para simular funcionalidades de uma loja virtual. Os produtos, preços e envios apresentados não representam necessariamente operações comerciais reais.
 
-Desenvolvido como atividade acadêmica da disciplina Raciocínio Algorítmico 3 (RA3) — 2026.
+Desenvolvido como atividade acadêmica Web Development: Front-End (Turma 2° U) (RA3) — 2026.
