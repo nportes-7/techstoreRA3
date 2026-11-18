@@ -1,6 +1,6 @@
 # TechStore — Loja Virtual de Tecnologia
 
-Projeto acadêmico desenvolvido para a disciplina de Raciocínio Algorítmico 3 (RA3). O objetivo é aplicar conhecimentos de HTML, CSS e JavaScript por meio da criação de uma loja virtual de produtos tecnológicos.
+Projeto acadêmico desenvolvido para a disciplina de Web Development (RA3). O objetivo é aplicar conhecimentos de HTML, CSS e JavaScript por meio da criação de uma loja virtual de produtos tecnológicos.
 
 **Site publicado:** https://nportes-7.github.io/techstoreRA3/
 
