@@ -78,6 +78,8 @@ TechStore/
 ├── contato.html
 ├── style.css
 ├── app.js
+├── breakpoint-media-favoritos.png
+├── network-dummyjson.png
 └── README.md
 ```
 
@@ -107,7 +109,7 @@ A página Ferramentas reúne operações matemáticas e o cálculo da média dos
 
 ## TDE 02 — Debugging em JavaScript
 
-Durante o desenvolvimento da TechStore, foram encontrados problemas relacionados ao carregamento dos dados e à consulta de produtos pela API. Abaixo estão registrados os problemas identificados até o momento.
+Durante o desenvolvimento da TechStore, foram encontrados problemas relacionados ao carregamento dos dados, à consulta de produtos pela API e ao formulário de atendimento. Abaixo estão registrados os problemas identificados até o momento.
 
 ### Erro 1 — Média dos produtos favoritos
 
@@ -157,15 +159,48 @@ O endpoint continua realizando a busca pelo termo `phone`.
 
 **Investigação:** verificar a requisição e os produtos retornados pela API na aba Network do navegador.
 
-### Erro 3 — Registro pendente
+### Erro 3 — 
 
 ### Evidências de debugging
 
 Evidências coletadas durante a investigação:
 
-- Captura de tela de um breakpoint com o código pausado e o Scope ou Watch visível.
-- Captura de tela da aba Network mostrando uma requisição HTTP investigada.
-- Trechos de código antes e depois das correções realizadas.
+#### 1. Breakpoint com o código pausado e o Scope visível
+
+\![Breakpoint pausado na função calcularMediaFavoritos com o Scope visível](breakpoint-media-favoritos.png)
+
+Execução pausada na linha 238 do `app.js`, dentro da função `calcularMediaFavoritos`, na página Ferramentas. No painel Scope (Escopo), o array `produtosMemoria` aparece com 23 produtos carregados e `produtosFavoritos` contém os 3 produtos favoritados, o que confirma a correção do Erro 1.
+
+#### 2. Aba Network com a requisição HTTP investigada
+
+\![Aba Network mostrando a requisição GET para a DummyJSON](network-dummyjson.png)
+
+Requisição `GET` para `https://dummyjson.com/products/search?q=phone`, com status `200 OK`, utilizada para verificar os produtos retornados pela API (Erro 2).
+
+#### 3. Código antes e depois da correção (Erro 1)
+
+**Antes:** os produtos eram carregados apenas na página Explorar.
+
+```javascript
+if (document.getElementById("gradeProdutos")) {
+    carregarProdutos();
+    configurarBusca();
+}
+```
+
+**Depois:** os produtos também passaram a ser carregados na página Ferramentas.
+
+```javascript
+if (document.getElementById("gradeProdutos")) {
+    carregarProdutos();
+    configurarBusca();
+}
+
+// CORREÇÃO: também carrega os produtos na página Ferramentas.
+if (document.getElementById("painelResultado")) {
+    carregarProdutos();
+}
+```
 
 ## Equipe
 
@@ -188,4 +223,4 @@ Evidências coletadas durante a investigação:
 
 Este projeto possui finalidade acadêmica e utiliza APIs públicas para simular funcionalidades de uma loja virtual. Os produtos, preços e envios apresentados não representam necessariamente operações comerciais reais.
 
-Desenvolvido como atividade acadêmica Web Development: Front-End (Turma 2° U) (RA3) — 2026.
+Desenvolvido como atividade acadêmica da disciplina Web Development: Front-End (Turma 2° U) (RA3) — 2026.
