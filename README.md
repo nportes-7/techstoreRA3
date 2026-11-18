@@ -159,11 +159,9 @@ O endpoint continua realizando a busca pelo termo `phone`.
 
 ### Erro 3 — Registro pendente
 
-O terceiro erro real e sua investigação ainda precisam ser identificados e documentados pela equipe. Não foi incluído um problema hipotético nesta versão.
-
 ### Evidências de debugging
 
-Adicionar as evidências coletadas durante a investigação:
+Evidências coletadas durante a investigação:
 
 - Captura de tela de um breakpoint com o código pausado e o Scope ou Watch visível.
 - Captura de tela da aba Network mostrando uma requisição HTTP investigada.
