@@ -32,7 +32,7 @@ Utilizada para obter os produtos exibidos no catálogo. A aplicação realiza um
 
 Os dados utilizados nos cartões incluem título, imagem, preço, categoria e avaliação.
 
-**Observação:** a busca pelo termo `phone` não restringe os resultados exclusivamente a produtos eletrônicos. Por isso, podem aparecer itens de outras categorias.
+**Observação:** a busca pelo termo `phone` retorna 23 produtos, das categorias `smartphones` e `mobile-accessories`.
 
 ### ViaCEP
 
@@ -80,7 +80,7 @@ TechStore/
 ├── app.js
 ├── breakpoint-media-favoritos.png
 ├── network-dummyjson.png
-└── README.md
+└── [README.md](coworker-file://b6c82737-ca5c-5515-9a49-86753ef578fc/README.md)
 ```
 
 ## TDE 01 — Funções em JavaScript
@@ -109,9 +109,9 @@ A página Ferramentas reúne operações matemáticas e o cálculo da média dos
 
 ## TDE 02 — Debugging em JavaScript
 
-Durante o desenvolvimento da TechStore, foram encontrados problemas relacionados ao carregamento dos dados, à consulta de produtos pela API e ao formulário de atendimento. Abaixo estão registrados os problemas identificados até o momento.
+Durante o desenvolvimento da TechStore, foram encontrados problemas relacionados ao carregamento dos dados, à consulta de produtos pela API e ao formulário de atendimento. Abaixo estão registrados os erros, como foram identificados e as soluções aplicadas.
 
-### Erro 1 — Média dos produtos favoritos
+### Erro 1 — Média dos produtos favoritos (erro de lógica)
 
 **Problema encontrado:**
 
@@ -141,25 +141,86 @@ if (
 
 **Problema encontrado:**
 
-A API retornava produtos de categorias diferentes, incluindo cosméticos e produtos de beleza, que não correspondiam à proposta da TechStore.
+O catálogo exibia produtos que não correspondiam à proposta da TechStore, como cosméticos e produtos de beleza.
 
 **Causa identificada:**
 
-A consulta utilizada não restringe os resultados exclusivamente a produtos eletrônicos.
+O endpoint utilizado devolvia produtos de todas as categorias da DummyJSON, sem filtrar pelo tema da loja.
 
-**Código utilizado:**
+**Solução aplicada:**
+
+O endpoint passou a usar a busca pelo termo `phone`, que retorna apenas produtos das categorias `smartphones` e `mobile-accessories`.
+
+**Antes:**
+
+```javascript
+const API_URL = "https://dummyjson.com/products";
+```
+
+**Depois:**
 
 ```javascript
 const API_URL = "https://dummyjson.com/products/search?q=phone";
 ```
 
-**Situação atual:**
+**Investigação:** aba Network do navegador, conferindo a requisição GET e a categoria dos produtos retornados pela API (ver evidência 2).
 
-O endpoint continua realizando a busca pelo termo `phone`.
+### Erro 3 — CEP com hífen não preenche o endereço
 
-**Investigação:** verificar a requisição e os produtos retornados pela API na aba Network do navegador.
+**Problema encontrado:**
 
-### Erro 3 — 
+Na página Contato, ao digitar o CEP com hífen (por exemplo, `01001-000`), os campos de rua, bairro e cidade não são preenchidos e nenhuma mensagem é exibida.
+
+**Causa identificada:**
+
+O campo CEP possui `maxlength="8"`. Com o hífen, o último dígito é cortado e restam apenas 7 números. Assim, a validação `cep.length !== 8` encerra a função antes da consulta ao ViaCEP.
+
+**Solução aplicada:**
+
+O atributo `maxlength` do campo CEP, no arquivo `contato.html`, foi alterado de 8 para 9, permitindo digitar o CEP com hífen.
+
+**Antes:**
+
+```html
+maxlength="8"
+```
+
+**Depois:**
+
+```html
+maxlength="9"
+```
+
+**Investigação:** teste do campo CEP com e sem hífen e análise da função `configurarViaCEP`.
+
+### Erro 4 — Campo Mensagem aceitava envio vazio
+
+**Problema encontrado:**
+
+Na página Contato, o campo Mensagem não exibia o texto de exemplo "Digite sua mensagem" e o formulário podia ser enviado sem nenhuma mensagem digitada.
+
+**Causa identificada:**
+
+Havia espaços e uma quebra de linha entre a abertura e o fechamento da tag `<textarea>`. Esses espaços viravam o conteúdo do campo, então o `placeholder` não aparecia e o `required` considerava o campo preenchido.
+
+**Solução aplicada:**
+
+O fechamento `</textarea>` foi colado logo depois da abertura da tag, deixando o campo realmente vazio.
+
+**Antes:**
+
+```html
+placeholder="Digite sua mensagem">
+</textarea>
+```
+
+**Depois:**
+
+```html
+placeholder="Digite sua mensagem"></textarea>
+```
+
+**Investigação:** teste de envio do formulário com o campo Mensagem vazio e análise do código do `contato.html`.
 
 ### Evidências de debugging
 
@@ -204,11 +265,11 @@ if (document.getElementById("painelResultado")) {
 
 ## Equipe
 
-- Gustavo Egídio Barros
-- Natã Portes Banruque da Silva
-- Mateus Augusto Tosin
-- Mateus Emmanuel Louzano de Quadros
-- Matheus Henrique Rios Ferreira
+- **Natã Portes Banruque da Silva - desenvolvimento do código (HTML, CSS e JavaScript), integração com as APIs, publicação no GitHub Pages e relatório de debugging (TDE 02).
+- **Gustavo Egídio Barros** — parte do desenvolvimento do código (HTML, CSS e JavaScript) HTML semântico: troca dos cartões de `div` para `article`. Apresenta as 4 páginas e a estrutura do HTML.
+- **Mateus Augusto Tosin** — parte do desenvolvimento do código (HTML, CSS e JavaScript) ajuste do Flexbox do menu (`justify-content`). Apresenta o layout, a responsividade e o modo escuro.
+- **Mateus Emmanuel Louzano de Quadros** — TDE 01: Ajuda no desenvolvimento do js, detalhamento dos recursos utilizados na documentação. Apresenta a página Ferramentas e a callback.
+- **Matheus Henrique Rios Ferreira** — Paticipou do desenvolvimento do codigo css, e js Formulário: correção do campo CEP (Erro 3) e do campo Mensagem (Erro 4). Apresenta as requisições GET e POST.
 
 ## Como executar o projeto
 
