@@ -153,7 +153,7 @@ const API_URL = "https://dummyjson.com/products/search?q=phone";
 
 **Situação atual:**
 
-O endpoint continua realizando a busca pelo termo `phone`. A limitação foi identificada, mas a filtragem exclusiva por categorias tecnológicas ainda não foi implementada.
+O endpoint continua realizando a busca pelo termo `phone`.
 
 **Investigação:** verificar a requisição e os produtos retornados pela API na aba Network do navegador.
 
@@ -176,8 +176,6 @@ Adicionar as evidências coletadas durante a investigação:
 - Mateus Augusto Tosin
 - Mateus Emmanuel Louzano de Quadros
 - Matheus Henrique Rios Ferreira
-
-**Contribuições individuais:** preencher com as atividades efetivamente desenvolvidas por cada integrante.
 
 ## Como executar o projeto
 
